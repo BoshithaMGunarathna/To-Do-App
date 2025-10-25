@@ -1,6 +1,0 @@
-[build]
-builder = "nixpacks"
-buildCommand = "echo 'Root project - no build needed'"
-
-[deploy]
-startCommand = "echo 'Root project - services defined below'"

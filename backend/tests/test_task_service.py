@@ -1,7 +1,3 @@
-"""
-Unit tests for TaskService.
-Tests business logic with mocked repository.
-"""
 import pytest
 from unittest.mock import Mock
 from services.task_service import TaskService

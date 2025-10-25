@@ -1,7 +1,3 @@
-"""
-Database configuration and connection management.
-Follows Single Responsibility Principle (SRP).
-"""
 import mysql.connector
 from mysql.connector import MySQLConnection
 import time
@@ -10,8 +6,6 @@ from typing import Optional
 
 
 class DatabaseConfig:
-    """Database configuration holder."""
-    
     def __init__(self):
         self.host = os.getenv('DB_HOST', 'mysql_db')
         self.user = os.getenv('DB_USER', 'root')
@@ -21,35 +15,13 @@ class DatabaseConfig:
 
 
 class DatabaseConnection:
-    """
-    Database connection manager with retry logic.
-    Follows Single Responsibility Principle (SRP).
-    """
-    
     def __init__(self, config: DatabaseConfig, max_retries: int = 5, retry_delay: int = 5):
-        """
-        Initialize database connection manager.
-        
-        Args:
-            config: Database configuration
-            max_retries: Maximum number of connection attempts
-            retry_delay: Delay between retries in seconds
-        """
         self.config = config
         self.max_retries = max_retries
         self.retry_delay = retry_delay
         self._connection: Optional[MySQLConnection] = None
     
     def connect(self) -> MySQLConnection:
-        """
-        Establish database connection with retry logic.
-        
-        Returns:
-            MySQL connection object
-            
-        Raises:
-            Exception: If connection fails after all retries
-        """
         retries = self.max_retries
         last_error = None
         
@@ -78,29 +50,15 @@ class DatabaseConnection:
         raise Exception(error_msg)
     
     def get_connection(self) -> MySQLConnection:
-        """
-        Get the current database connection.
-        Creates a new connection if one doesn't exist.
-        
-        Returns:
-            MySQL connection object
-        """
         if self._connection is None or not self._connection.is_connected():
             self.connect()
         return self._connection
     
     def close(self):
-        """Close the database connection."""
         if self._connection and self._connection.is_connected():
             self._connection.close()
             print("Database connection closed")
     
     def reconnect(self) -> MySQLConnection:
-        """
-        Reconnect to the database.
-        
-        Returns:
-            MySQL connection object
-        """
         self.close()
         return self.connect()
