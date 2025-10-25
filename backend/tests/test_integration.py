@@ -1,3 +1,7 @@
+"""
+Integration tests for Task API endpoints.
+Tests the full stack with test database.
+"""
 import pytest
 import json
 from app import create_app

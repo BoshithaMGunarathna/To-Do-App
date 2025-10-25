@@ -65,25 +65,17 @@ docker compose restart frontend
 ```
 To-Do-App/
 ├── backend/
-│   ├── config/             # Database configuration
-│   ├── controllers/        # HTTP request handlers
-│   ├── services/           # Business logic layer
-│   ├── repositories/       # Data access layer
-│   ├── tests/              # Unit tests
-│   ├── app.py              # Flask application entry point
-│   ├── init.sql            # Database initialization script
+│   ├── app.py              # Flask API
 │   ├── requirements.txt    # Python dependencies
+│   ├── init.sql           # Database initialization
 │   └── Dockerfile
 ├── frontend/
 │   ├── src/
-│   │   ├── components/     # Reusable React components
-│   │   ├── App.tsx         # Main application component
-│   │   ├── TaskList.tsx    # Task list component
-│   │   ├── TaskList.styles.ts  # Styled components
-│   │   └── main.tsx        # Application entry point
-│   ├── package.json        # Node.js dependencies
+│   │   ├── App.tsx        # Main React component
+│   │   └── TaskList.tsx   # Task list component
+│   ├── package.json
 │   └── Dockerfile
-└── docker-compose.yml      # Multi-container orchestration
+└── docker-compose.yml      # Docker orchestration
 ```
 
 ## Technology Stack

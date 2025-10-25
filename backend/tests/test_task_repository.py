@@ -1,3 +1,7 @@
+"""
+Unit tests for TaskRepository.
+Tests all database operations with mocked database connection.
+"""
 import pytest
 from unittest.mock import Mock, MagicMock, call
 from repositories.task_repository import TaskRepository
