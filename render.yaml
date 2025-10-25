@@ -1,0 +1,52 @@
+services:
+  # MySQL Database
+  - type: pserv
+    name: mysql-db
+    env: docker
+    dockerfilePath: ./backend/Dockerfile
+    autoDeploy: false
+    
+  # Backend API
+  - type: web
+    name: todo-backend
+    env: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    healthCheckPath: /tasks
+    envVars:
+      - key: DB_HOST
+        fromDatabase:
+          name: todo-mysql
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: todo-mysql
+          property: port
+      - key: DB_USER
+        fromDatabase:
+          name: todo-mysql
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: todo-mysql
+          property: password
+      - key: DB_NAME
+        value: todo_db
+
+  # Frontend
+  - type: web
+    name: todo-frontend
+    env: docker
+    dockerfilePath: ./frontend/Dockerfile
+    dockerContext: ./frontend
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          name: todo-backend
+          type: web
+          property: host
+
+databases:
+  - name: todo-mysql
+    databaseName: todo_db
+    user: root
