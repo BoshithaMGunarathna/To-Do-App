@@ -18,6 +18,8 @@ A full-stack To-Do application built with React, Flask, and MySQL.
    ```bash
    docker compose up -d
    ```
+   
+   > **Note**: The backend may take 30-60 seconds to fully start as it waits for MySQL to initialize. The application includes automatic retry logic and will recover automatically if the initial connection fails. All services will be ready once the containers are running.
 
 3. **Access the application**
    - **Frontend**: http://localhost:5173
@@ -25,6 +27,12 @@ A full-stack To-Do application built with React, Flask, and MySQL.
    - **phpMyAdmin**: http://localhost:8081
      - Username: `root`
      - Password: `root`
+
+4. **Verify all services are running** (optional)
+   ```bash
+   docker compose ps
+   ```
+   All services should show "Up" status. If backend shows "Restarting", wait 30-60 seconds for MySQL initialization to complete.
 
 ## Available Commands
 
